@@ -57,12 +57,11 @@ function parseDataFromIso8601(value) {
  */
 function isLeapYear(date) {
   // throw new Error('Not implemented');
-  let d = new Date(date.getFullYear(), 2, 0);
-   if (d.getDate() === 29) {
+  const d = new Date(date.getFullYear(), 2, 0);
+  if (d.getDate() === 29) {
     return true;
-  } else {
-    return false;
   }
+  return false;
 }
 
 
@@ -87,22 +86,18 @@ function timeSpanToString(startDate, endDate) {
   const min = (new Date(endDate)).getMinutes() - (new Date(startDate)).getMinutes();
   const sec = (new Date(endDate)).getSeconds() - (new Date(startDate)).getSeconds();
   let milSec = (new Date(endDate)).getMilliseconds() - (new Date(startDate)).getMilliseconds();
-function test(value) {
-  if (value / 10 >= 1) {
-    value = String(value);
-    return value;
-  } else if (value / 10 < 1 && value / 10 !== 0){
-    value = "0" + String(value)
-    return value;
-  } else {
-    value = "00"
-    return value;
+  function test(value) {
+    if (value / 10 >= 1) {
+      return String(value);
+    } if (value / 10 < 1 && value / 10 !== 0) {
+      return `0${String(value)}`;
+    }
+    return '00';
   }
-}
-if (milSec === 0) {
-  milSec = "000";
-}
-return `${test(hour)}:${test(min)}:${test(sec)}.${milSec}`;
+  if (milSec === 0) {
+    milSec = '000';
+  }
+  return `${test(hour)}:${test(min)}:${test(sec)}.${milSec}`;
 }
 
 
@@ -124,17 +119,15 @@ return `${test(hour)}:${test(min)}:${test(sec)}.${milSec}`;
  */
 function angleBetweenClockHands(date) {
   // throw new Error('Not implemented');
-  let hour = date.getHours();
-  let min = date.getMinutes();
-  console.log(hour, min);
-let res = 30 * hour + 0.5 * min - 6 * min;
-console.log(res);
-if (res === 0) {
+  const hour = date.getHours();
+  const min = date.getMinutes();
+  const res = 30 * hour + 0.5 * min - 6 * min;
+  if (res === 0) {
+    return 0;
+  } if (res === 90) {
+    return Math.PI / 2;
+  }
   return 0;
-} else if (res === 90) {
-return Math.PI/2;
-}
-
 }
 
 

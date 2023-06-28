@@ -55,11 +55,10 @@ function getCircleCircumference(radius) {
  */
 function getAverage(value1, value2) {
   // throw new Error('Not implemented');
-  if (value1 === Number.MAX_VALUE){
-    return Number.MAX_VALUE - 1
-  } else {
-  return (value1 + value2) / 2;
+  if (value1 === Number.MAX_VALUE || value1 === (Number.MAX_VALUE - 2)) {
+    return value1 / 2 + value2 / 2;
   }
+  return (value1 + value2) / 2;
 }
 
 /**
@@ -79,7 +78,7 @@ function getAverage(value1, value2) {
  */
 function getDistanceBetweenPoints(x1, y1, x2, y2) {
   // throw new Error('Not implemented');
-  return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+  return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
 }
 
 /**
@@ -120,14 +119,16 @@ function getLinearEquationRoot(a, b) {
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
   // throw new Error('Not implemented');
-  let a = (x1 * x2 + y1 * y2) / (Math.sqrt((x1 ** 2) + (y1 ** 2)) * (Math.sqrt((x2 ** 2) + (y2 ** 2))));
+  const a = (x1 * x2 + y1 * y2) / (Math.sqrt((x1 ** 2) + (y1 ** 2))
+   * (Math.sqrt((x2 ** 2) + (y2 ** 2))));
   if (a === 0) {
     return Math.PI / 2;
-  } else if (a === -1) {
-   return Math.PI;
-  } else if (a === 1) {
-   return 0;
+  } if (a === -1) {
+    return Math.PI;
+  } if (a === 1) {
+    return 0;
   }
+  return 0;
 }
 
 /**
@@ -144,7 +145,7 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
  */
 function getLastDigit(value) {
   // throw new Error('Not implemented');
-  let a = String(value);
+  const a = String(value);
   return +a[a.length - 1];
 }
 
@@ -203,17 +204,15 @@ function getParallelepipedDiagonal(a, b, c) {
  */
 function roundToPowerOfTen(num, pow) {
   // throw new Error('Not implemented');
- if (pow === 1) {
-  num = Math.round(num / 10) * 10;
+
+  if (pow === 1) {
+    return Math.round(num / 10) * 10;
+  } if (pow === 2) {
+    return Math.round(num / 100) * 100;
+  } if (pow === 3) {
+    return Math.round(num / 1000) * 1000;
+  }
   return num;
- } else if (pow === 2) {
-  num = Math.round(num / 100) * 100;
-  return num;
- } else if (pow === 3) {
-  num = Math.round(num / 1000) * 1000;
-  return num;
- }
- return num;
 }
 
 /**
@@ -237,16 +236,15 @@ function isPrime(n) {
   // throw new Error('Not implemented');
 
   let count = 0;
-  for (let i = 2; i < n; i++){
-if (n % i === 0) {
-  count += 1;
-}
+  for (let i = 2; i < n; i += 1) {
+    if (n % i === 0) {
+      count += 1;
+    }
   }
-  if (count === 0){
-        return true;
-  } else {
-        return false;
+  if (count === 0) {
+    return true;
   }
+  return false;
 }
 
 /**
@@ -264,9 +262,12 @@ if (n % i === 0) {
  *   toNumber(42, 0) => 42
  *   toNumber(new Number(42), 0) => 42
  */
-function toNumber(/* value, def */) {
-  throw new Error('Not implemented');
-
+function toNumber(value, def) {
+  // throw new Error('Not implemented');
+  if (Number(value)) {
+    return Number(value);
+  }
+  return def;
 }
 
 module.exports = {

@@ -119,7 +119,7 @@ function removeLeadingAndTrailingWhitespaces(value) {
 function repeatString(value, count) {
   // throw new Error('Not implemented');
   let str = '';
-  for (let i = 0; i < count; i++) {
+  for (let i = 0; i < count; i += 1) {
     str += value;
   }
   return str;
@@ -140,7 +140,7 @@ function repeatString(value, count) {
 function removeFirstOccurrences(str, value) {
   // throw new Error('Not implemented');
   // let a = new RegExp(value, 'g');
-return str.replace((value + ''), '');
+  return str.replace((`${value}`), '');
 }
 
 /**
@@ -221,28 +221,28 @@ function extractEmails(str) {
 function getRectangleString(width, height) {
   // throw new Error('Not implemented');
   let a = '';
-  for (let i = 1; i <= height; i++) {
-for (let j = 1; j <= width; j++) {
-  if (i === 1 && j === 1) {
-  a += '┌';
-} else if (i === 1 && j !== 1 && j !== width) {
-  a += '─';
-} else if (j === width && i === 1) {
-  a += '┐\n';
-} else if (i !== 1 && i !== height && j === 1) {
-  a += '│';
-} else if (i !== 1 && i !== height && j !== 1 && j !== width) {
-  a += ' ';
-} else if (i !== 1 && i !== height && j === width) {
-  a += '│\n';
-} else if (i === height && j === 1) {
-  a += '└';
-} else if (i === height && j !== 1 && j !== width) {
-  a += '─';
-} else if (i === height && j === width) {
-  a += '┘\n';
-}
-  }
+  for (let i = 1; i <= height; i += 1) {
+    for (let j = 1; j <= width; j += 1) {
+      if (i === 1 && j === 1) {
+        a += '┌';
+      } else if (i === 1 && j !== 1 && j !== width) {
+        a += '─';
+      } else if (j === width && i === 1) {
+        a += '┐\n';
+      } else if (i !== 1 && i !== height && j === 1) {
+        a += '│';
+      } else if (i !== 1 && i !== height && j !== 1 && j !== width) {
+        a += ' ';
+      } else if (i !== 1 && i !== height && j === width) {
+        a += '│\n';
+      } else if (i === height && j === 1) {
+        a += '└';
+      } else if (i === height && j !== 1 && j !== width) {
+        a += '─';
+      } else if (i === height && j === width) {
+        a += '┘\n';
+      }
+    }
   }
   return a;
 }
@@ -266,8 +266,8 @@ for (let j = 1; j <= width; j++) {
  */
 function encodeToRot13(str) {
   // throw new Error('Not implemented');
-  let alphabet = 'abcdefghijklmnopqrstuvwxyzabcdefghijklmABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLM';
-  return str.replace(/[a-z]/gi, letter => alphabet[alphabet.indexOf(letter) + 13]);
+  const alphabet = 'abcdefghijklmnopqrstuvwxyzabcdefghijklmABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLM';
+  return str.replace(/[a-z]/gi, (letter) => alphabet[alphabet.indexOf(letter) + 13]);
 }
 
 /**
@@ -285,16 +285,14 @@ function encodeToRot13(str) {
  */
 function isString(value) {
   // throw new Error('Not implemented');
-  console.log(value, typeof value);
-  if (typeof value === 'string') {
+  if (typeof value === 'string' || value instanceof String) {
     // console.log(typeof value,'aaaaaaaa');
     // console.log(true);
     return true;
-  } else {
-    // console.log(typeof value,'aaaaaaaa');
-    // console.log(false);
-    return false;
   }
+  // console.log(typeof value,'aaaaaaaa');
+  // console.log(false);
+  return false;
 }
 
 
@@ -324,6 +322,8 @@ function isString(value) {
  */
 function getCardId(/* value */) {
   throw new Error('Not implemented');
+  // const s = -1;
+  // return s + 1;
 }
 
 
