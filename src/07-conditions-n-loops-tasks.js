@@ -141,15 +141,23 @@ function isTriangle(a, b, c) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  // console.log(rect1, rect2);
-  // // throw new Error('Not implemented');
-  // if ((rect2.top < rect1.height || rect2.left < rect1.width) && rect1.height > rect2.top) {
-  //   if (rect2.top > rect1.top) console.log('true');
-  //   return true;
-  // }
-  // console.log('false');
-  // return false;
+function doRectanglesOverlap(rect1, rect2) {
+  // throw new Error('Not implemented');
+  const leftSum2 = rect2.left + rect2.width;
+  const topSum2 = rect2.top + rect2.height;
+  const leftSum1 = rect1.left + rect1.width;
+  const topSum1 = rect1.top + rect1.height;
+  if ((rect2.top >= rect1.top && rect2.top <= topSum1 && rect2.left >= rect1.left
+     && rect2.left <= leftSum1) || (leftSum2 >= rect1.left
+      && leftSum2 <= rect1.width && rect2.top >= rect1.top
+      && rect2.top <= rect1.height) || (leftSum2 >= rect1.left
+        && leftSum2 <= leftSum1 && (topSum2 >= rect1.top || topSum2 <= topSum1))
+         || (rect2.left >= rect1.left && rect2.left <= leftSum1
+          && topSum2 >= rect1.top && topSum2 <= topSum1)) {
+    return true;
+  }
+
+  return false;
 }
 
 
@@ -200,8 +208,10 @@ function isInsideCircle(circle, point) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
+function findFirstSingleChar(str) {
+  // throw new Error('Not implemented');
+  const nonRep = str.match(/(.)(?!.*\1)(?<!\1.+)/);
+  return nonRep && nonRep[1];
 }
 
 
@@ -309,8 +319,27 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  // throw new Error('Not implemented');
+  const reversCcn = String(ccn).split('').reverse();
+  const correctValArr = reversCcn.map((numb, i) => {
+    let number = numb;
+    if (i % 2 !== 0) {
+      number = (+number) * 2;
+
+      if (number > 9) {
+        const a = String(number);
+        number = (+a[0]) + (+a[1]);
+      }
+      return number;
+    }
+    return +number;
+  });
+  const sum = correctValArr.reduce((acum, val) => (acum + val), 0);
+  if (sum % 10 === 0) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -465,8 +494,40 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  // throw new Error('Not implemented');
+
+  return m1.map((row, i) => row.map((numb, i2, arr) => {
+    let sumNumb = 0;
+    for (let j = 0; j < arr.length; j += 1) {
+      sumNumb += arr[j] * m2[j][i];
+    }
+
+    return sumNumb;
+  }));
+  // console.log(m1.map((row, i) => {
+  //   for (let j = 0; j < m2[0].length; j += 1) {
+  //     row.reduce((acum, numb, ind) => {
+  //       acum += numb * m2[ind][j];
+  //       // console.log(acum);
+  //       return acum;
+  //     }, 0);
+  //     // console.log("aaaaaaaaaaaaa");
+  //   }
+
+  // }))
+  //   return m1.map((row, i) => {
+
+  //     for (let j = 0; j < m2[0].length; j += 1) {
+  //      let b = row.reduce((acum, numb, ind) => {
+  //         acum += numb * m2[ind][j];
+  //         // console.log(acum);
+  //         return acum;
+  //       }, 0);
+  //       // console.log("aaaaaaaaaaaaa");
+  //     }
+
+//   });
 }
 
 
